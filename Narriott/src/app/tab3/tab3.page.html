@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Proceed with Your Payment
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-label>Guest Name:</ion-label>
+    <ion-label>{{ hotelmanager.guestName }}</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>Number of nights:</ion-label>
+    <ion-label>{{ hotelmanager.numberOfNights }}</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>Date:</ion-label>
+    <ion-label>{{ hotelmanager.bookingDate ? hotelmanager.bookingDate.substring(0, 10) : '' }}</ion-label>
+  </ion-item>
+  <ion-item lines="none">
+    <ion-label>Narriot Rewards</ion-label>
+    <ion-label>{{ hotelmanager.narriottRewardsMember ? 'Membership Discount' : 'Not a Member' }}</ion-label>
+  </ion-item>
+
+  <ion-list>
+    <ion-title *ngIf="bookedRooms.length>0" style="text-align: center;">Booked Rooms</ion-title>
+    <ion-title *ngIf="bookedRooms.length==0" style="text-align: center;">No Booked Rooms!</ion-title>
+    <ion-card *ngFor="let bookedRoom of bookedRooms">
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <img [src]="bookedRoom.imageUrls[0]">
+        </ion-thumbnail>
+        <ion-label>
+          <h1>{{ bookedRoom.title }}</h1>
+          <p>{{ bookedRoom.description }}</p>
+          <p>Price: ${{ bookedRoom.price }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-card>
+  </ion-list>
+
+  <ion-button *ngIf="bookedRooms.length>0" expand="block" color="danger" (click)="onCancelBooking()">Cancel</ion-button>
+</ion-content>

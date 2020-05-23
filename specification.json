@@ -1,0 +1,4 @@
+{
+  "features": "CDFG",
+  "description": "A hotel booking system that displays available rooms and prices, provides a datepicker feature, vibrates when the booking is made. The user is able to slide the pages from left to right"
+}

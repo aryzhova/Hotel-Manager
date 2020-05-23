@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Book Your Stay
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-sm="8" offset-sm="2">
+        <ion-list>
+          <ion-item>
+            <ion-label>Guest Name:</ion-label>
+            <ion-input id="guestName" slot="end" type="text" [(ngModel)]="hotelmanager.guestName" required>
+            </ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label slot="start">Number of nights:</ion-label>
+            <ion-input id="nights" type="number" min="1" [(ngModel)]="hotelmanager.numberOfNights" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">MM/DD/YYYY</ion-label>
+            <ion-datetime displayFormat="MM/DD/YYYY" min="2019-12-01" max="2021-12-01"
+              [(ngModel)]="hotelmanager.bookingDate" required></ion-datetime>
+          </ion-item>
+          <ion-item lines = "none">
+            <ion-checkbox slot="start" [(ngModel)]="hotelmanager.narriottRewardsMember" required>
+            </ion-checkbox>
+            <ion-label>Narriot Rewards</ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-button (click)="hotelmanager.saveSettings()">
+              Save settings
+            </ion-button>
+          </ion-item>
+          <ion-label color="danger" *ngIf="!hotelmanager.isBookingValid">All fields are required! Please update and save
+            settings.</ion-label>
+
+        </ion-list>
+
+        <ion-list>
+          <ion-card *ngFor="let room of hotelmanager.roomsAvailable">
+            <ion-card-header>
+              <ion-card-title>{{ room.title }}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-slides>
+                <ion-slide *ngFor="let imageUrl of room.imageUrls">
+                    <img [src]="imageUrl" />
+                </ion-slide>
+              </ion-slides>
+              <ion-label>{{ room.description }} - ${{ room.price }}</ion-label>
+              <ion-button *ngIf="!this.hotelmanager.bookedRooms[room.id]" (click)="onBook(room.id)" slot="end">Book
+              </ion-button>
+              <ion-item *ngIf="this.hotelmanager.bookedRooms[room.id]" button (click)="onBookedClicked(room)" lines="none">
+                <ion-icon name="checkmark"></ion-icon>
+                <ion-label>Booked!</ion-label>
+              </ion-item>
+            </ion-card-content>
+          </ion-card>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,8 @@
+{
+  "name": "Narriott",
+  "integrations": {
+    "cordova": {},
+    "capacitor": {}
+  },
+  "type": "angular"
+}
